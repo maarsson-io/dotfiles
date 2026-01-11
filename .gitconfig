@@ -1,0 +1,23 @@
+[include]
+    path = ~/.gitconfig.local
+[core]
+    excludesfile = ~/.gitignore_global
+[init]
+    defaultBranch = develop
+[color]
+    ui = auto
+[fetch]
+    prune = true
+[pull]
+    rebase = false
+[push]
+    default = simple
+[rerere]
+    enabled = true
+[diff]
+    algorithm = histogram
+[merge]
+    conflictstyle = zdiff3
+    ff = false
+[commit]
+    template = ~/.gitmessage
