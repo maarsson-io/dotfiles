@@ -21,7 +21,7 @@ fi
 mkdir -p "$CFG_DIR"
 
 if [ ! -f "$IGNORE_FILE" ]; then
-    info "Creating ignore file…"
+    info "Creating ignore file..."
     cat > "$IGNORE_FILE" <<'EOF'
 # dotfiles repo ignores (repo-local via core.excludesFile)
 # Keep this focused on secrets, history, and OS/app state.
@@ -52,14 +52,14 @@ else
     info "Ignore file already exists, leaving it as-is."
 fi
 
-info "Cloning dotfiles repository to $GIT_DIR…"
+info "Cloning dotfiles repository to $GIT_DIR..."
 git clone --bare "$REPO_URL" "$GIT_DIR"
 
-info "Configuring local settings…"
+info "Configuring local settings..."
 dotfiles config --local status.showUntrackedFiles no
 dotfiles config --local core.excludesFile "$IGNORE_FILE"
 
-info "Checking out tracked files…"
+info "Checking out tracked files..."
 if ! dotfiles checkout; then
     fail "Checkout failed (existing files would be overwritten). Move conflicting files away and re-run, or run: dotfiles checkout"
 fi
@@ -67,7 +67,7 @@ fi
 dotfiles submodule update --init --recursive 2>/dev/null || true
 
 if [ ! -f "$LOCAL_GITCONFIG" ]; then
-    info "Creating user configuration file…"
+    info "Creating user configuration file..."
 
     # Optional interactive prompt if running in a TTY
     if [ -t 0 ]; then
