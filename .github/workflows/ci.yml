@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-and-smoke:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zsh shellcheck
+
+      - name: Install tools (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew update
+          brew install zsh shellcheck
+
+      - name: ShellCheck installer
+        run: |
+          shellcheck .scripts/dotfiles-install.sh
+
+      - name: zsh syntax check
+        run: |
+          zsh -n .config/zsh/aliases.zsh
+
+      - name: Smoke test installer (isolated HOME)
+        run: |
+          set -eu
+
+          export HOME="$(mktemp -d)"
+          mkdir -p "$HOME"
+
+          REMOTE_DIR="$(mktemp -d)"
+          git clone --bare . "$REMOTE_DIR/dotfiles.git"
+
+          REPO_URL="$REMOTE_DIR/dotfiles.git" \
+          GIT_NAME="CI User" \
+          GIT_EMAIL="ci@example.invalid" \
+          /bin/sh .scripts/dotfiles-install.sh
+
+          # Assert checked-out tracked files exist in $HOME
+          test -d "$HOME/.dotfiles"
+          test -f "$HOME/.gitconfig"
+          test -f "$HOME/.gitignore_global"
+          test -f "$HOME/.gitmessage"
+          test -f "$HOME/README.md"
+          test -f "$HOME/.scripts/dotfiles-install.sh"
+          test -f "$HOME/.github/workflows/ci.yml"
+          test -f "$HOME/.config/zsh/aliases.zsh"
+
+          # Assert generated local-only files exist
+          test -f "$HOME/.gitconfig.local"
+          test -f "$HOME/.config/dotfiles/ignore"
+
+          # Assert dotfiles repo works
+          git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" status >/dev/null

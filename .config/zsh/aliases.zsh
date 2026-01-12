@@ -32,9 +32,6 @@ alias lla='ls -lah' # include hidden files
 alias lll='ls -ltr' # sorted by updated date
 alias df='df -h' # human readable df
 
-# make new folder and cd in it
-md() { mkdir -p -- "$1" && cd -- "$1"; }
-
 # Print PATH entries
 path() { printf '%s\n' "${PATH//:/$'\n'}"; }
 
