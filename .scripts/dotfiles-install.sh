@@ -86,7 +86,7 @@ if [ ! -f "$LOCAL_GITCONFIG" ]; then
     email = ${GIT_EMAIL}
 EOF
 else
-    info "~/.gitconfig.local already exists, leaving it as-is."
+    info "$HOME/.gitconfig.local already exists, leaving it as-is."
 fi
 
 ok "Setting up dotfiles repository done."
