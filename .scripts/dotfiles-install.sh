@@ -15,7 +15,7 @@ dotfiles() { git --git-dir="$GIT_DIR" --work-tree="$HOME" "$@"; }
 command -v git >/dev/null 2>&1 || fail "git is required"
 
 if [ -e "$GIT_DIR" ]; then
-    fail "$GIT_DIR already exists. Aborting."
+    fail "${GIT_DIR} already exists. Aborting."
 fi
 
 mkdir -p "$CFG_DIR"
@@ -52,7 +52,7 @@ else
     info "Ignore file already exists, leaving it as-is."
 fi
 
-info "Cloning dotfiles repository to $GIT_DIR..."
+info "Cloning dotfiles repository to ${GIT_DIR}..."
 git clone --bare "$REPO_URL" "$GIT_DIR"
 
 info "Configuring local settings..."
