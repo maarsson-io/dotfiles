@@ -5,7 +5,8 @@ REPO_URL="${REPO_URL:-https://github.com/maarsson-io/dotfiles.git}"
 GIT_DIR="$HOME/.dotfiles"
 CFG_DIR="${HOME}/.config/dotfiles"
 IGNORE_FILE="${CFG_DIR}/ignore"
-LOCAL_GITCONFIG="$HOME/.gitconfig.local"
+XDG_CONFIG_GIT_HOME="$HOME/.config/git"
+LOCAL_GITCONFIG="$XDG_CONFIG_GIT_HOME/.gitconfig.local"
 
 info() { printf "[\033[34mINFO\033[0m] %s\n" "$1"; }
 ok() { printf "[\033[32m OK \033[0m] %s\n" "$1"; }
@@ -19,6 +20,7 @@ if [ -e "$GIT_DIR" ]; then
 fi
 
 mkdir -p "$CFG_DIR"
+mkdir -p "$XDG_CONFIG_GIT_HOME"
 
 if [ ! -f "$IGNORE_FILE" ]; then
     info "Creating ignore file..."
@@ -86,7 +88,7 @@ if [ ! -f "$LOCAL_GITCONFIG" ]; then
     email = ${GIT_EMAIL}
 EOF
 else
-    info "$HOME/.gitconfig.local already exists, leaving it as-is."
+    info "$HOME/.config/git/.gitconfig.local already exists, leaving it as-is."
 fi
 
 ok "Setting up dotfiles repository done."

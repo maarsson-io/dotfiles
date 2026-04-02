@@ -1,26 +1,74 @@
 [include]
-    path = ~/.gitconfig.local
-[core]
-    excludesfile = ~/.gitignore_global
+    # Local/private config goes in the include, primarily the "user" settings
+    path = ~/.config/git/.gitconfig.local
 [init]
     defaultBranch = develop
+[branch]
+    # Show most recently changed branches first.
+    sort = -committerdate
+[checkout]
+    # Set default remote to origin, which helps with working with multiple remotes
+    defaultRemote = origin
+[core]
+	# Use a global `.gitignore`.
+	excludesfile = ~/.config/git/.gitignore
+
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error.
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+	# Do not rely on file change time (ctime) to detect modifications. Makes `git rebase` safer on macOS.
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
+
+    # Uncomment this one if you run into Unicode filename issues
+	# Prevent showing files whose names contain non-ASCII symbols as unversioned.
+	# http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+	# precomposeunicode = false
+
+	# Speed up commands involving untracked files such as `git status`.
+	# https://git-scm.com/docs/git-update-index#_untracked_cache
+	untrackedCache = true
 [color]
-    ui = auto
+	# Use colors in Git commands that are capable of colored output when
+	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+	ui = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+[color "status"]
+	added = green
+	changed = cyan
+	untracked = yellow
+	deleted = red
+[diff]
+    algorithm = histogram
+	# Detect copies as well as renames.
+	renames = copies
 [fetch]
+	# Prune branches and tags that no longer exist remote.
     prune = true
+    pruneTags = true
 [pull]
     rebase = false
 [push]
     default = simple
+	# Avoid having to type --setupstream and stuff when pushing a local branch that doesn't exist on the remote
+	autoSetupRemote = true
 [rerere]
     enabled = true
-[diff]
-    algorithm = histogram
 [merge]
     conflictstyle = zdiff3
     ff = false
 [commit]
-    template = ~/.gitmessage
+    template = ~/.config/.gitmessage
 [gitflow "branch"]
     master = master
     develop = develop
@@ -30,3 +78,30 @@
     hotfix = hotfix/
     support = support/
     versiontag = 
+[alias]
+	# Show verbose output about tags, branches or remotes
+	tags = tag -l
+	branches = branch --all
+	remotes = remote --verbose
+	# List all configuration settings.
+	configs = config --list
+	# List aliases.
+	aliases = config --get-regexp alias
+	# List contributors with number of commits.
+	contributors = shortlog --summary --numbered
+	# Show the user email for the current repository.
+	whoami = config user.email
+	# Amend the currently staged files to the latest commit.
+	amend = commit --amend --reuse-message=HEAD
+	# Undo the last commit, keeping changes in the working directory.
+	uncommit = reset --soft HEAD~1
+	# Unsage all files in the working directory.
+	unstage = reset HEAD
+	# Seach for a string in the commit history
+	search-commits = "!f() { git log --all --grep=\"$1\"; }; f"
+	# Find SHA using fragment
+	find = rev-parse
+	# Squash the last n commits into one
+	squash = "!f() { git rebase -i HEAD~$1; }; f"
+	# Init empty repo, considering git-flow settings
+    init-repo = "!f() { git init -b master && git commit --allow-empty -m 'chore: init' && git switch -c develop; }; f"
