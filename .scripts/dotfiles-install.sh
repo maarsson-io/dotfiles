@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -eu
 
-REPO_URL="${REPO_URL:-https://github.com/maarsson/dotfiles.git}"
+REPO_URL="${REPO_URL:-https://github.com/maarsson-io/dotfiles.git}"
 GIT_DIR="$HOME/.dotfiles"
 CFG_DIR="${HOME}/.config/dotfiles"
 IGNORE_FILE="${CFG_DIR}/ignore"

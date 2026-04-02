@@ -1,5 +1,5 @@
 
-# maarsson/dotfiles
+# maarsson-io/dotfiles
 
 Public dotfiles managed as a Git bare repository.
 
@@ -18,7 +18,7 @@ This repository intentionally tracks only selected files from `$HOME`. Machine-s
 
 Run the install script, that will also prompt for your git user details:
 
-`curl -fsSL https://raw.githubusercontent.com/maarsson/dotfiles/master/.scripts/dotfiles-install.sh | /bin/sh`
+`curl -fsSL https://raw.githubusercontent.com/maarsson-io/dotfiles/master/.scripts/dotfiles-install.sh | /bin/sh`
 
 ## What is tracked
 
