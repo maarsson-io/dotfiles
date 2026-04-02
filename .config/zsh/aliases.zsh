@@ -17,7 +17,8 @@ alias .....='cd ../../../..'
 alias dl='cd "$HOME/Downloads"'
 alias dt='cd "$HOME/Desktop"'
 alias c='cd "$HOME/Code"'
-alias h='cd "$HOME/Herd"'
+alias pj='cd "$HOME/Code/Projects"'
+alias pk='cd "$HOME/Code/Packages"'
 alias s='cd "$HOME/Sync"'
 
 # File shortcuts
