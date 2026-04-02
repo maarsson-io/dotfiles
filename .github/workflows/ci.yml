@@ -52,15 +52,16 @@ jobs:
           # Assert checked-out tracked files exist in $HOME
           test -d "$HOME/.dotfiles"
           test -f "$HOME/.gitconfig"
-          test -f "$HOME/.gitignore_global"
-          test -f "$HOME/.gitmessage"
+          test -f "$HOME/.config/git/.gitconfig.local.example"
+          test -f "$HOME/.config/git/.gitignore"
+          test -f "$HOME/.config/git/.gitmessage"
           test -f "$HOME/README.md"
           test -f "$HOME/.scripts/dotfiles-install.sh"
           test -f "$HOME/.github/workflows/ci.yml"
           test -f "$HOME/.config/zsh/aliases.zsh"
 
           # Assert generated local-only files exist
-          test -f "$HOME/.gitconfig.local"
+          test -f "$HOME/.config/git/.gitconfig.local"
           test -f "$HOME/.config/dotfiles/ignore"
 
           # Assert dotfiles repo works
