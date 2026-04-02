@@ -24,12 +24,12 @@ Run the install script, that will also prompt for your git user details:
 
 Typical tracked files (initial scope):
 - `~/.gitconfig`
-- `~/.gitignore_global`
-- `~/.gitmessage`
+- `~/config/git/.gitignore`
+- `~/config/git/.gitmessage`
 - `.scripts/dotfiles-install.sh`
 
 Not tracked:
-- `~/.gitconfig.local` (sensitive data)
+- `~/config/git/.gitconfig.local` (sensitive data)
 - `~/.config/dotfiles/ignore` (machine policy)
 
 ## Common commands
