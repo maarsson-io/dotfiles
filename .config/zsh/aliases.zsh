@@ -78,6 +78,12 @@ fi
 
 # Misc
 alias week='date +%V'
+isdiff() {
+  git diff develop "$(git merge-tree --write-tree develop "$1" | head -n1)"
+}
+ismerged() {
+  git diff --stat develop "$(git merge-tree --write-tree develop "$1" | head -n1)"
+}
 
 command -v timew >/dev/null 2>&1 && {
   alias tww='timew week'
