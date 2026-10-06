@@ -58,6 +58,7 @@
     pruneTags = true
 [pull]
     rebase = false
+	ff = only
 [push]
 	default = simple
 	# Avoid having to type --setupstream and stuff when pushing a local branch that doesn't exist on the remote
