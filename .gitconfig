@@ -106,3 +106,4 @@
 	squash = "!f() { git rebase -i HEAD~$1; }; f"
 	# Init empty repo, considering git-flow settings
     init-repo = "!f() { git init -b master && git commit --allow-empty -m 'chore: init' && git switch -c develop; }; f"
+	cleanup = !git fetch --prune && git branch -vv | awk '/: gone]/{print $1}' | xargs -n 1 git branch -d
