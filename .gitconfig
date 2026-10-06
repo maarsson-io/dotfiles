@@ -54,12 +54,12 @@
 	renames = copies
 [fetch]
 	# Prune branches and tags that no longer exist remote.
-    prune = true
+	prune = true
     pruneTags = true
 [pull]
     rebase = false
 [push]
-    default = simple
+	default = simple
 	# Avoid having to type --setupstream and stuff when pushing a local branch that doesn't exist on the remote
 	autoSetupRemote = true
 [rerere]
